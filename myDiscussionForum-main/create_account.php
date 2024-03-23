@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +36,8 @@
         <p id="maxLength" class="invalid">Minimum <b>8 characters</b></p>
     </div>
 
-    <?php 
-    start_session();
+    
+    <?php
     require 'db/connectionDB.php';
     if(!empty($_SESSION['uid'])) {
         header('Location: index.php');
@@ -73,7 +76,7 @@
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $sql = "INSERT INTO users (username, email, password, profilepic) VALUES ('?', '?', '?', '?')";
                 $stmt = mysqli_stmt_init($conn, $sql);
-                $result = mysqli_stmt_prepare($stmt);
+                $result = mysqli_stmt_prepare($stmt, $sql);
                 echo "<script> alert('Account has been created successfully! ');</script>";
             }else{
                 echo "<script> alert('Passwords do not match! ');</script>";
