@@ -1,0 +1,55 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    text-align: center;
+    display: block;
+    background-color: #3f5b3f;
+}
+
+body h2{
+    background-color: #2e2e2e;
+    color: #f5f5dc;
+    width: max-content;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 25px 5px 25px;
+    border-radius: 10px;
+}
+
+form{
+    width: max-content;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #f5f5dc;
+    color: #2e2e2e;
+}
+
+input[type="text"],
+input[type="file"],
+form select{
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 0.85em;
+    padding: 5px;
+    margin: 3px;
+    background-color: #ffffff;
+}
+
+input[type="submit"]{
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 0.85em;
+    background-color: #000;
+    color: #fff;
+    padding: 3px 5px 3px 5px;
+}
+
+input[type="submit"]:hover{
+    background-color: lightgreen;
+    color: black;
+}

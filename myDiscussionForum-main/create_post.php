@@ -51,23 +51,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- Add CSS link here -->
     <!-- Add JavaScript link here -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeChat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <title>Chatterbox</title> -->
 </head>
+
 <body>
-<div class = "flex-create">
-    <div class = "createPost">
-        <!-- Add HTML/CSS here -->
-        <form name = "createPosts" method = "post"  enctype="multipart/form-data" action = "createPost.php">
-            <input type="text" id="title" name="title" placeholder="Title"><br>
-            <select id="community" name="community">
-                <option value="">Choose Community</option>
-                <?php
+    <h2>CHATTERBOX</h2>
+    <div class="flex-create">
+        <div class="createPost">
+            <!-- Add HTML/CSS here -->
+            <form name="createPosts" method="post" enctype="multipart/form-data" action="createPost.php">
+                <input type="text" id="title" name="title" placeholder="Title"><br>
+                <select id="community" name="community">
+                    <option value="">Choose Community</option>
+                    <?php
                     // Connect to the database
                     include 'connectionDB.php';
                     
@@ -83,21 +87,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Close the database connection
                     mysqli_close($conn);
                 ?>
-            </select><br>
-            <input id="description" name="description" placeholder="Description (optional)"></textarea><br>
-            <input type="file" id="image" name="image"><br>
-            <input type="submit" value="Post" id="postButton">
-        </form>
+                </select><br>
+                <input type="text" id="description" name="description"
+                    placeholder="Description (optional)"></textarea><br>
+                <input type="file" id="image" name="image"><br>
+                <input type="submit" value="Post" id="postButton">
+            </form>
+        </div>
     </div>
-</div>
-<!-- Add JavaScript here -->
+    <!-- Add JavaScript here -->
+    <script src="script/validatePost.js"></script>
+
 </body>
 <footer>
     <!-- Add HTML/CSS here -->
 </footer>
+
 </html>
-
-</body>
-</html>
-
-
