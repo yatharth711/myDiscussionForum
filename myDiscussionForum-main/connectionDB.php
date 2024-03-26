@@ -1,7 +1,7 @@
 <?php 
     $hostname="localhost";
     $username="root";
-    $password="password";
+    $password="";
     $database="discussionforum";
 
     //Database credentials for server dev
