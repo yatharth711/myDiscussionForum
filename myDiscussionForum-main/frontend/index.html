@@ -1,4 +1,4 @@
-
+<!-- 
         <?php 
         require_once 'connectionDB.php';
         $query = 'SELECT c.name, u.com_id, COUNT(u.uid)as numJoined FROM communities c JOIN user_communities u
@@ -27,25 +27,32 @@
         $name = $row['name'];
         echo '<form method="post" action="leaveCommunity.php">';
         echo '<input type="hidden" name="com_id" value="'.$com_id.'">';
-        echo '<button type="submit" class="deleteButton1"><!-- Add HTML/CSS here --></button>';
+        echo '<button type="submit" class="deleteButton1"> Add HTML/CSS here </button>';
         echo '<p><a href="community.php?com_id='.$com_id.'">'.$name.'</a></p>';
         echo '</form>';
         }
     } else {
         echo '<p> Login To Join Communities </p>';
     }
-         ?>
-        <a href="createCommunity.php" class = "button">Create</a>
-        <a href="communityList.php" class = "button">Join</a>
+         ?>  -->
+<!DOCTYPE html>
+<html lang="en">
 
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
 
-</div>
-</div>
-<!-- Add JavaScript here -->
+    <title>Chatterbox</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Trending Chats</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
 </body>
-<footer>
-    <!-- Add HTML/CSS here -->
-</footer>
-
-</html>
