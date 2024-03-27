@@ -31,14 +31,17 @@ $result = mysqli_query($conn, $query);
     <title>Chatterbox</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <input id="search" type="text" placeholder="Search">
-            <li id="admin"><a href="#">Admin</a></li>
-            <li><a href="#">Community Statistics</a></li>
-            <li><a href="#">User Statistics</a></li>
-        </ul>
-    </nav>
+    <div class="navbar">
+        <nav>
+            <ul>
+                <input id="search" type="text" placeholder="Search">
+                <li id="admin"><a href="#">Admin</a></li>
+                <li><a href="#">Community Statistics</a></li>
+                <li><a href="#">User Statistics</a></li>
+            </ul>
+        </nav>
+    </div>
+    
 
     <section>
         <div id="community">

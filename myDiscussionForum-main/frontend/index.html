@@ -44,10 +44,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
 
-    <title>Chatterbox</title>
 </head>
 
 <body>
+    <h2>Chatterbox</h2>
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
@@ -56,6 +56,39 @@
         </ul>
     </nav>
 
+    <section class="content">
+        <div id="sidebar">
+            <a href="#">Create Chat</a>
+            <hr>
+            <a href="#">Find Chatters</a>
+            <hr>
+            <a href="#">Create Chatter</a>
+
+        </div>
+        <div class="top-comm">
+            <h4>Top Communities</h4>
+            <!-- add php to list top 20 communnities
+               select count(post) group by community id sort by count(post) desc limit 20 -->
+                <div id="top_comm_card">
+                    <p>Name<a href="#">Join</a></p>
+               </div>
+        </div>
+
+        <div class="recent-posts">
+            <h4>Recent Posts</h4>
+            <div id="recent_post_card">
+                <p>Title</p>
+                <p>User</p>
+                <p>Content</p>
+                <p>Like</p>
+                <p>Dislike</p>
+                <hr>
+            </div>
+        </div>
+
+       
+    </section>
     
+
 
 </body>

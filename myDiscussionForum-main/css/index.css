@@ -6,11 +6,15 @@
     background-color: #3f5b3f;
 }
 
-title{
+h2{
     font-weight: bold;
     color: #f5f5dc;
     padding: 5px;
     background-color: #2e2e2e;
+}
+
+.navbar{
+    position: fixed;
 }
 
 nav{
@@ -51,3 +55,65 @@ nav ul input{
     padding: 5px;
     margin: 4px;
 }
+
+.top-comm h4, .recent-posts h4{
+    background-color: #2e2e2e;
+    margin: 5px;
+    color: #f5f5dc;
+    padding: 5px;
+    border-radius: 10px;
+    
+}
+
+.content{
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: 5px;
+}
+
+.content #sidebar{
+    float: left;
+    margin: 5px;
+    position: sticky;
+}
+
+ #sidebar a {
+    font-size: small;
+    background-color: #2e2e2e;
+    text-decoration: none;
+    color: #a4c5a4;
+    padding: 10px;
+    text-align: center;
+
+}
+
+#sidebar a:hover{
+    background-color: #a4c5a4;
+    color: #2e2e2e;
+    
+}
+
+#sidebar hr{
+    border-color: #a4c5a4;
+}
+
+.content .top-comm{
+    width: 24%;
+}
+
+.content #sidebar{
+    width: 10%;
+    float: left;
+}
+
+.content .recent-posts{
+    width: 63%;
+}
+
+.content{
+    display: inline-flex;
+    margin-top: 10px;
+    width:95%;
+}
+
