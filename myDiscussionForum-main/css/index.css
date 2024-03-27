@@ -13,21 +13,23 @@ title{
     background-color: #2e2e2e;
 }
 
-/* nav{
+nav{
     border-top: 3px solid #a4c5a4;
     background-color: #2e2e2e;
 }
 
 nav ul{
     background-color: #2e2e2e;
+    margin: 0 5px 0 5px;
 }
 nav ul li, nav ul input{
     display: inline-block;
     background-color: #2e2e2e;
-    padding: 5px;
+    padding: 0;
 }
 nav ul li:hover{
     background-color: #a4c5a4;
+    font-weight: bold;
 }
 nav ul li a{
     text-decoration: none;
@@ -48,4 +50,4 @@ nav ul input{
     float: left;
     padding: 5px;
     margin: 4px;
-} */
+}
