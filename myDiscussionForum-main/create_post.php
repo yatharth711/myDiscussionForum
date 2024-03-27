@@ -1,54 +1,3 @@
-<?php
-include 'connectionDB.php';
-session_start();
-if(empty($_SESSION["uid"])){
-    header("Location: login.php");
-}
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $community = $_POST['community'];
-    $description = $_POST['description'];
-    $username = $_SESSION['uid'];
-
-    // handle img file upload
-    if(isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
-        $fileName = basename($_FILES["img"]["name"]);
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-
-        // Check if file is an img
-        $allowedTypes = array("jpg", "jpeg", "png", "gif", "heic");
-        if(!in_array($fileType, $allowedTypes)) {
-            // Add JavaScript alert here
-            exit;
-        }
-
-        $target_dir = "postsUploads/";
-        $uploadPath = $target_dir . $fileName;
-        if(move_uploaded_file($_FILES["img"]["tmp_name"], $uploadPath)) {
-            //insert statement if img is added
-            $imgPath = $uploadPath;
-            $query = "INSERT INTO content (title, text , author, com_id, img) VALUES (?,?,?,?,?)";
-            $stmt = mysqli_prepare($conn,$query);
-            mysqli_stmt_bind_param($stmt, "ssiis", $title, $description, $username, $community, $fileName);
-            $result = mysqli_stmt_execute($stmt);
-            // Add header redirection here
-            mysqli_close($conn);
-        } else {
-            // Add JavaScript alert here
-            exit;
-        }
-    } else {
-        //insert statement for no img
-        $query = "INSERT INTO content (title, text, author, com_id) VALUES (?,?,?,?)";
-        $stmt = mysqli_prepare($conn,$query);
-        mysqli_stmt_bind_param($stmt, "ssii", $title, $description, $username, $community);
-        $result = mysqli_stmt_execute($stmt);
-        // Add header redirection here
-        mysqli_close($conn);
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class = "flex-create">
     <div class = "createPost">
         <!-- Add HTML/CSS here -->
-        <form name = "createPosts" method = "post"  enctype="multipart/form-data" action = "createPost.php">
+        <form name = "createPosts" method = "post"  enctype="multipart/form-data" action = "create_post.php">
             <input type="text" id="title" name="title" placeholder="Title"><br>
             <select id="community" name="community">
                 <option value="">Choose Community</option>
@@ -99,5 +48,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+<?php
+include 'connectionDB.php';
+session_start();
+// if(empty($_SESSION["uid"])){
+//     header("Location: login.php");
+// }
 
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $community = $_POST['community'];
+    $description = $_POST['description'];
+    // $username = $_POST['uid'];
 
+        $query = "INSERT INTO content (title, text, com_id) VALUES (?,?,?)";
+        $stmt = mysqli_prepare($conn,$query);
+        mysqli_stmt_bind_param($stmt, "ssi", $title, $description, $community);
+        $result = mysqli_stmt_execute($stmt);
+    //     // Add header redirection here
+        header("Location: index.php");
+        mysqli_close($conn);
+     }
+
+?>
