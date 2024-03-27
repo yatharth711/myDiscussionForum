@@ -5,3 +5,7 @@
 
 Project Mockup
 (https://www.figma.com/file/pPaCJeZIprYt3mzyiqifWS/360-Project?type=design&node-id=0%3A1&mode=design&t=79fMZvh8OCxQJc2Y-1)
+
+Admin login:
+Username -> admin
+Password -> Passw0rd
