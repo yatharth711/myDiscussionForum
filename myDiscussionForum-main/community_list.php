@@ -3,22 +3,43 @@ session_start();
 
 include_once 'connectionDB.php';
 
-$query = "SELECT com_id, name FROM communities";
-
-// check if search query has been submitted
 if(isset($_POST['submit'])) {
-    $search = $_POST['search'];
-    $query .= " WHERE name LIKE '%$search%'";
-} 
+    $search = mysqli_real_escape_string($conn, $_POST['search']);
+    $query = "SELECT c.com_id, c.name, COUNT(DISTINCT uc.uid) as followers, COUNT(DISTINCT ct.content_id) as posts
+              FROM communities c
+              LEFT JOIN user_communities uc ON c.com_id = uc.com_id
+              LEFT JOIN content ct ON c.com_id = ct.com_id
+              WHERE c.name LIKE '%$search%'
+              GROUP BY c.com_id";
+} else {
+    $query = "SELECT c.com_id, c.name, COUNT(DISTINCT uc.uid) as followers, COUNT(DISTINCT ct.content_id) as posts
+              FROM communities c
+              LEFT JOIN user_communities uc ON c.com_id = uc.com_id
+              LEFT JOIN content ct ON c.com_id = ct.com_id
+              GROUP BY c.com_id";
+}
 
 $result = mysqli_query($conn, $query);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    // Here you can add HTML to format the output
-    // You can also add CSS for styling
-    // If needed, you can add JavaScript for interactivity
+if($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $com_id = $row['com_id'];
+        $name = $row['name'];
+        $followers = $row['followers'];
+        $posts = $row['posts'];
+        
+        echo '<div class="community">';
+        echo '<p class="community-name" onmouseover="changeColor(this)" onmouseout="resetColor(this)"><a href = "community_post.php?com_id='.$com_id.'">'.$name.'</a> - Followers: '.$followers.' - Posts: '.$posts.'</p>';
+        echo '</div>';
+    }
+} else {
+    echo '<p>Error: '.mysqli_error($conn).'</p>';
 }
-
 
 mysqli_close($conn);
 ?>
+
+<form method="POST" action="">
+    <input type="text" name="search" placeholder="Search communities...">
+    <input type="submit" name="submit" value="Search">
+</form>
