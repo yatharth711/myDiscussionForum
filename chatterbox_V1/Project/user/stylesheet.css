@@ -1,0 +1,37 @@
+body {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.form-group label {
+    color: #fff;
+}
+
+.form-group input,
+.form-group select {
+    background-color: #495057;
+    border: none;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268;
+}
+
+.card {
+    background-color: #495057;
+    border: none;
+}
+
+.card-title,
+.card-text {
+    color: #fff;
+}
+.container button{
+    margin-left: 47%;
+}
