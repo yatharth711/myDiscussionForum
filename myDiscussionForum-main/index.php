@@ -14,7 +14,7 @@
          -->
 
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +25,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="css/index.css">
+
+    <!-- <link rel="stylesheet" href="css/index.css"> -->
 
 </head>
 
@@ -44,32 +44,34 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <?php
-                            require_once 'connectionDB.php';
-                            if (!isset($_SESSION["username"])) {
-                                echo '<li class="nav-item">
+                    require_once 'connectionDB.php';
+                    if (!isset($_SESSION["username"])) {
+                        echo '<li class="nav-item">
                 <a class="nav-link" href="login.php">Login</a>
               </li>';
-                            } else {
-                                echo '<li class="nav-item">
+                    } else {
+                        echo '<li class="nav-item">
                 <a class="nav-link" href="logout.php">Logout</a>
               </li>';
-                            }
+                    }
 
-                            ?>
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
                     <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Options
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="create_community.php">Create a Chatterbox</a></li>
-            <li><a class="dropdown-item" href="#">Find a Chatterbox</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Options
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="create_community.php">Create a Chatterbox</a></li>
+                            <li><a class="dropdown-item" href="#">Find a Chatterbox</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
                     <!-- <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
@@ -93,9 +95,11 @@
     <section class="content">
         <div id="sidebar">
             <a href="create_community.php">Create Chat</a>
-            <hr>
+            
             <a href="community_list.php">Find Chatters</a>
-            <hr>
+            
+            <a href=""></a>
+
 
 
         </div>
@@ -124,18 +128,18 @@
                 <p>Name<a href="join_com.php">Join</a></p>
             </div>
         </div>
-       
+
         <div class="recent-posts">
             <h4>Recent Posts</h4>
             <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
             <div id="recent_post_card">
                 <!-- TODO php to display all the community posts here -->
                 <p>Title</p>

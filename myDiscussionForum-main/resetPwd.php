@@ -66,7 +66,7 @@ function send_email($email){
     $email = addslashes($email);
   
     $sql = "insert into temp_id (email,code,end) value ('$email','$code','$end')";
-    mysqli_sql($conn,$sql);
+    mysqli_prepare($conn,$sql);
   
      $to = $email;
      $subject = 'Password reset for Forum website';
@@ -83,7 +83,7 @@ function send_email($email){
     $password = password_hash($password, PASSWORD_DEFAULT);
     $email = addslashes($_SESSION['forgot']['email']);  
     $sql = "update users set password = '$password' where email = '$email' limit 1";
-    mysqli_sql($conn,$sql);
+    mysqli_prepare($conn,$sql);
   
   }
   function valid_email($email){
