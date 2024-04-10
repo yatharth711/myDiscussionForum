@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +9,14 @@
     <h1>Join a Community</h1>
     <form action="process_join.php" method="post">
         <label for="community">Select a community:</label>
-        <!-- <select id="community" name="community">
+        <?php if(isset($_SESSION["uid"])) { ?>
+        <a href="account.php" class="button"><?php echo $_SESSION["username"]; ?></a>
+        <?php } else { ?>
+        <a href="login.php" class="button">Login</a>
+        <?php } ?>
             <?php
             include 'connectionDB.php';
             
-
             $query = "SELECT * FROM communities";
             $result = mysqli_query($conn, $query);
             while ($row = mysqli_fetch_assoc($result)) {

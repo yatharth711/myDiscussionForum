@@ -27,12 +27,44 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- <link rel="stylesheet" href="css/index.css"> -->
+    <style>
+        .button {
+            border: none;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
 
+        .upvote {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .upvote:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .downvote {
+            background-color: white;
+            color: black;
+            border: 2px solid #f44336;
+        }
+
+        .downvote:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
 </head>
 
 <body style="margin: 5px;">
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Chatterbox</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +97,7 @@ session_start();
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="create_community.php">Create a Chatterbox</a></li>
-                            <li><a class="dropdown-item" href="#">Find a Chatterbox</a></li>
+                            <li><a class="dropdown-item" href="community_list.php">Find a Chatterbox</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -83,53 +115,43 @@ session_start();
             </div>
         </div>
     </nav>
-    <!-- <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="adminlogin.php">Admin</a></li>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="create_account.php">Register</a></li>
-        </ul>
-    </nav> -->
-
+    
     <section class="content">
-        <div id="sidebar">
-            <a href="create_community.php">Create Chat</a>
-            
-            <a href="community_list.php">Find Chatters</a>
-            
-            <a href=""></a>
-
-
-
+        <br>
+        <br>
+        <br>
         </div>
         <div class="top-comm">
             <h4>Top Communities</h4>
             <?php
             require_once 'connectionDB.php';
-            if (isset($_SESSION['uid'])) {
-                $uid = $_SESSION['uid'];
-                $query = "SELECT c.name, u.com_id FROM communities c JOIN user_communities u ON c.com_id = u.com_id WHERE u.uid = '$uid' LIMIT 7";
-                $result = mysqli_query($conn, $query);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $com_id = $row['com_id'];
+
+            $query = "SELECT c.name, c.description, count(u.uid) as joined FROM communities c JOIN user_communities u ON c.com_id = u.com_id order by joined desc";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                if (empty($row) == 0) {
+                    echo '<p>No Chatterboxes here</p>';
+                    echo '<a href="create_community.php">Make the first Chatterbox</a>';
+                } else {
+                    $desc = $row['description'];
                     $name = $row['name'];
-                    echo '<form method="post" action="leaveCommunity.php">';
-                    echo '<input type="hidden" name="com_id" value="' . $com_id . '">';
-                    echo '<button type="submit" class="deleteButton1"> Add HTML/CSS here </button>';
-                    echo '<p><a href="community.php?com_id=' . $com_id . '">' . $name . '</a></p>';
-                    echo '</form>';
+                    echo '<h3>' . $name . '</h3>';
+                    echo '<p>' . $desc . '</p>';
+                    if (isset($_SESSION['uid'])) {
+                        echo '<a href="join_com.php">Join Chatterbox</a>';
+                    } else {
+                        echo '<a href="login.php">Join Chatterbox</a>';
+                    }
                 }
-            } else {
-                echo '<p> Login To Join Communities </p>';
             }
+
             ?>
-            <div id="top_comm_card">
-                <p>Name<a href="join_com.php">Join</a></p>
-            </div>
+
         </div>
 
         <div class="recent-posts">
+
+
             <h4>Recent Posts</h4>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -140,15 +162,7 @@ session_start();
                     <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
-            <div id="recent_post_card">
-                <!-- TODO php to display all the community posts here -->
-                <p>Title</p>
-                <p>User</p>
-                <p>Content</p>
-                <p>Like</p>
-                <p>Dislike</p>
-                <hr>
-            </div>
+            
         </div>
 
 

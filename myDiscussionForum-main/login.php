@@ -1,10 +1,8 @@
 <?php
 session_start();
 require 'connectionDB.php';
-if(!empty($_SESSION["uid"])){
-    header("Location: index.php");
-}
-if(isset($_POST["submit"])){
+
+if (isset($_POST["submit"])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
@@ -12,19 +10,23 @@ if(isset($_POST["submit"])){
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-    
-    if($user){
-        if(password_verify($password, $user['password'])){
+    if ($user = $result->fetch_assoc()) {
+        if (password_verify($password, $user['password'])) {
+            $_SESSION["uid"] = $user["uid"];
             $_SESSION["username"] = $user['username'];
-            $_SESSION["uid"]= $user["uid"];
-            header("Location: index.php");
-            exit();
-        }else{
-            echo "<script>alert('Oops, Wrong Password');</script>";
+            
+            if ($user['checkAdmin'] == 1) {
+                header("Location: admin.php");
+                exit();
+            } else {
+                header("Location: index.php");
+                exit();
+            }
+        } else {
+            echo "<script>alert('Invalid login credentials');</script>";
         }
-    }else{
-        echo "<script>alert('User does not exist');</script>";
+    } else {
+        echo "<script>alert('Invalid login credentials');</script>";
     }
 }
 ?>
@@ -35,8 +37,8 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel = "stylesheet" href = "css/login.css">
-    <link rel = "stylesheet" href = "css/style.css"> -->
+    <link rel = "stylesheet" href = "css/login.css">
+    <link rel = "stylesheet" href = "css/style.css">
 
     
     <title>Login</title>

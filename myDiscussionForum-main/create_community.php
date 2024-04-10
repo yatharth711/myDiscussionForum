@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .form-container {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .form-container input[type="text"],
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .form-container input[type="submit"] {
-            padding: 10px 20px;
-            border: none;
-            background-color: #008CBA;
-            color: white;
-            cursor: pointer;
-        }
-        .form-container input[type="submit"]:hover {
-            background-color: #007B9A;
-        }
-    </style>
+    <title>Create a Chatterbox</title>
 </head>
 <body>
     <div class="form-container">

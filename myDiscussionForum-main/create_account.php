@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/create_account.css">
+    <link rel="stylesheet" href="css/create_account.css">
 
     <title>Create Account</title>
 </head>
@@ -152,54 +152,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </script>
 
-<!--
-    // require 'db/connectionDB.php';
-    // if (!empty($_SESSION['uid'])) {
-    //     header('Location: index.php');
-    // }
-    // if (isset($_POST['submit'])) {
-    //     $username = $_POST['new-username'];
-    //     $email = $_POST['email'];
-    //     $password = $_POST['new-password'];
-    //     $confirm_password = $_POST['confirm-password'];
-    //     if (isset($_FILES['profilepic']) && $_FILES['profilepic']['error'] == 0) {
-    //         $fileName = basename($_FILES["profilepic"]["name"]);
-    //         $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-    //         $validFiles = array("jpg", "jpeg", "png", "gif");
-    //         if (!in_array($fileType, $validFiles)) {
-    //             echo "<script>alert('File must be an image.');</script>";
-    //             exit;
-    //         }
-    //         $uploadDir = "ProfilePics/";
-    //         $uploadPath = $uploadDir . $fileName;
-    //         if (move_uploaded_file($_FILES["profilepic"]["tmp_name"], $uploadPath)) {
-
-    //             $profilepicPicPath = $uploadPath;
-    //         } else {
-    //             echo "<script>alert('Error uploading file.');</script>";
-    //             exit;
-    //         }
-    //     }
-    //     $exists = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
-    //     if (mysqli_num_rows($exists) > 0) {
-    //         echo
-    //         "<script>
-    //             alert('Username or email already exists');</script>";
-    //     } else {
-    //         if ($password == $confirm_password) {
-    //             $password = password_hash($password, PASSWORD_DEFAULT);
-    //             $sql = "INSERT INTO users (username, email, password, profilepic) VALUES ('?', '?', '?', '?')";
-    //             $stmt = mysqli_stmt_init($conn, $sql);
-    //             $result = mysqli_stmt_prepare($stmt, $sql);
-    //             echo "<script> alert('Account has been created successfully! ');</script>";
-    //         } else {
-    //             echo "<script> alert('Passwords do not match! ');</script>";
-    //         }
-    //     }
-    // }
-
-    // ?>  -->
-</body>
 <footer>
     <!-- Add footer stuff here -->
 </footer>
