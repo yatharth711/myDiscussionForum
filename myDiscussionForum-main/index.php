@@ -152,13 +152,34 @@ session_start();
         <div class="recent-posts">
 
 
-            <h4>Recent Posts</h4>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
+            <h4>Top Chats</h4>
+            <?php
+                require_once "connectionDB.php";
+                $sql= "select title, author, text, date, img from content";
+                $result= mysqli_query($conn, $sql);
+               
+                if(empty(mysqli_num_rows($result))){
+                    echo "<p>No Chats Here";
+                    echo '<p>Start Chat<a href="create_post.php"> Now</a></p>';
+                }else{
+                    while($row= mysqli_num_rows($result)){
+                        echo '<div class="card" style="width: 18rem;">';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">'.$row['title'].'</h5>';
+                        echo '<h6 class="card-subtitle mb-2 text-body-secondary">'.$row['author'].'</h6>';
+                        echo '<p class="card-text">'.$row['text'].'</p>';
+                        echo '<a href="#" class="card-link">Card link</a>';
+                    }
+                }
+               
+            
+            ?>
+            
+                
+                    
+                    
+                    
+                    
                     <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
