@@ -38,7 +38,7 @@ $result = mysqli_query($conn, $query);
 <div class="navbar">
         <nav>
             <ul>
-                <input id="search" type="text" placeholder="Search">
+                <!-- <input id="search" type="text" placeholder="Search"> -->
                 <li id="admin"><a href="#">Admin</a></li>
                 <li><a href="#">Community Statistics</a></li>
                 <li><a href="#">User Statistics</a></li>
@@ -72,34 +72,43 @@ $result = mysqli_query($conn, $query);
 
     </div>
     <div id="community">
-            <h3>Community Statistics</h3>
-            <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="community_list.php" >Communities</a></p>
-            <?php 
-            require_once 'connectionDB.php';
-            if(isset($_SESSION['uid'])) {
-                $uid = $_SESSION['uid'];
-                $query = "SELECT c.com_id, c.name, c.description FROM communities ";
-                $result = mysqli_query($conn, $query);
-                if($result) {
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $com_id = $row['com_id'];
-                        $name = $row['name'];
-                        $description = $row['description'];
-                        echo '<p><a href = "community.php?com_id='.$com_id.'">'.$name.'</a></p>';
-                        echo '<p>Description: '.$description.'</p>';
-                    }
-                } else {
-                    echo '<p>Error: '.mysqli_error($conn).'</p>';
+    <h3>Community Statistics</h3>
+    <div class="categories">
+        <p style="color:#A67EF3; font-size: 1.3em;"><a href="community_list.php">Communities</a></p>
+        <?php 
+        require_once 'connectionDB.php';
+        if(isset($_SESSION['uid'])) {
+            // Start the table and add headers for community name and description
+            echo '<table border="1" style="width:100%; margin-top: 20px;">';
+            echo '<thead><tr><th>Community Name</th><th>Description</th></tr></thead>';
+            echo '<tbody>';
+            
+            $query = "SELECT com_id, name, description FROM communities";
+            $result = mysqli_query($conn, $query);
+            if($result) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    $com_id = $row['com_id'];
+                    $name = $row['name'];
+                    $description = $row['description'];
+                    // Each community is displayed as a row within the table
+                    echo '<tr>';
+                    echo '<td><a href="community.php?com_id='.$com_id.'">'.htmlspecialchars($name).'</a></td>';
+                    echo '<td>'.htmlspecialchars($description).'</td>';
+                    echo '</tr>';
                 }
             } else {
-                echo '<p> Login To Join Communities </p>';
-            }?>
-        </div>
-                
-       
-            <!-- add php here -->
-        </div>
+                echo '<tr><td colspan="2">Error: '.mysqli_error($conn).'</td></tr>';
+            }
+            echo '</tbody>';
+            echo '</table>'; // Close the table
+        } else {
+            echo '<p> Login To Join Communities </p>';
+        }
+        ?>
+    </div>
+</div>
+
+
     <section>
         
 
