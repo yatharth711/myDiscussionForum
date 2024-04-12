@@ -7,7 +7,7 @@ session_start();
 require_once 'connectionDB.php';
 
 if(isset($_GET['submit'])) {
-$search_term = mysql_real_escape_string($conn, $_GET['search']);
+$search_term = mysqli_real_escape_string($conn, $_GET['search']);
 //query that checks search term using LIKE
 $query = "SELECT p.*, u.username, c.name FROM content p
 INNER JOIN users u ON p.author  = u.uid
