@@ -1,0 +1,32 @@
+/* *{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    text-align: center;
+
+}
+
+h2{
+    font-weight: bold;
+    color: #f5f5dc;
+    padding: 5px;
+    background-color: #2e2e2e;
+}
+
+
+
+.content{
+    text-align: center;
+    display: flexbox;
+}
+
+.recent-posts{
+    float: right;
+
+}
+
+
+.scrollable {
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+} */
