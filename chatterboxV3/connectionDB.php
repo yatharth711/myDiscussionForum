@@ -1,4 +1,3 @@
-echo 'Hello world'
 <?php
 
 $host = 'localhost';
