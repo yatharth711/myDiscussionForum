@@ -1,9 +1,10 @@
+echo 'Hello world'
 <?php
 
 $host = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'discussionforum';
+$username = '48138358';
+$password = '48138358';
+$dbname = 'db_48138358';
 
 //Create connection
 $conn = mysqli_connect($host, $username, $password, $dbname);
