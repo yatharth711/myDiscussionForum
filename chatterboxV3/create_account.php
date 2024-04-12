@@ -2,53 +2,67 @@
 session_start();
 require 'connectionDB.php';
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
     $confirmPassword = $_POST['confirm-password'];
-    if(isset($_FILES['profile']) && $_FILES['profile']['error'] == 0) {
-        // Get file information
-        $fileName = basename($_FILES["profile"]["name"]);
-        $fileType = pathinfo($fileName, PATHINFO_EXTENSION);        
-        $validFiles = array("jpg", "jpeg", "png", "gif");
-        if(!in_array($fileType, $validFiles)) {
-            echo "<script>alert('File must be an image.');</script>";
-            exit;
-        }
-        $uploadDir = "ProfilePics/";
-        // Sanitize file name
-        $fileName = preg_replace("/[^a-zA-Z0-9\.\-]/", "", $fileName);
-        $uploadPath = $uploadDir . $fileName;
-        if(move_uploaded_file($_FILES["profile"]["tmp_name"], $uploadPath)) {
-            // File was uploaded successfully
-            // Save file path to database for user profile
-            $profilePicPath = $uploadPath;
-        } else {
-            echo "<script>alert('Error uploading file.');</script>";
-            exit;
-        }
-        $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
-        if(mysqli_num_rows($duplicate)> 0){
-            echo "<script>alert('Username or email already exists');</script>";
-        }else{
-            if($password == $confirmPassword){
-                $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-                $query = "INSERT INTO users (username, email, password, profile) VALUES (?, ?, ?, ?)";
-                $stmt = mysqli_prepare($conn, $query);
-                mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $passwordHashed, $fileName);
-                $result = mysqli_stmt_execute($stmt);
 
-                echo "<script>alert('Account created successfully');</script>";  
-                header("Location: login.php");
-            }else{
-                echo "<script>alert('Password does not match');</script>";
+    // Check for duplicate usernames or emails securely
+    $duplicateQuery = "SELECT * FROM users WHERE username = ? OR email = ?";
+    $stmt = mysqli_prepare($conn, $duplicateQuery);
+    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+    mysqli_stmt_execute($stmt);
+    $duplicateResult = mysqli_stmt_get_result($stmt);
+
+    if(mysqli_num_rows($duplicateResult) > 0){
+        echo "<script>alert('Username or email already exists');</script>";
+    } else {
+        if(isset($_FILES['profile']) && $_FILES['profile']['error'] == 0) {
+            // Get file information
+            $fileName = basename($_FILES["profile"]["name"]);
+            $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));        
+            $validFiles = array("jpg", "jpeg", "png", "gif");
+            
+            if(!in_array($fileType, $validFiles)) {
+                echo "<script>alert('File must be an image.');</script>";
+                exit;
+            } else {
+                // Create a unique file name for the uploaded file
+                $newFileName = uniqid("PP_", true) . '.' . $fileType;
+                $uploadDir = "ProfilePics/";
+                $uploadPath = $uploadDir . $newFileName;
+                
+                if(move_uploaded_file($_FILES["profile"]["tmp_name"], $uploadPath)) {
+                    // File was uploaded successfully
+                    $fileName = $newFileName; // Use the new, unique file name
+                } else {
+                    echo "<script>alert('Error uploading file.');</script>";
+                    exit;
+                }
             }
+        }
+
+        if($password == $confirmPassword){
+            $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (username, email, password, profile) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $passwordHashed, $fileName);
+            $result = mysqli_stmt_execute($stmt);
+
+            if ($result) {
+                echo "<script>alert('Account created successfully');</script>";  
+                echo "<script>window.location = 'login.php';</script>";
+            } else {
+                echo "<script>alert('Failed to create account');</script>";
+            }
+        } else {
+            echo "<script>alert('Password does not match');</script>";
         }
     }
 }
 ?>
+
 
     
 <!DOCTYPE html>
